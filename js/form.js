@@ -15,39 +15,31 @@ window.validateForm = (function () {
 
 
 // Автоматическая корректировка полей формы: время заезда и выезда.
-  timeCheckIn.addEventListener('change', function () {
-    if (timeCheckIn.value === '12') {
-      timeCheckOut.value = '12';
-    }
-    if (timeCheckIn.value === '13') {
-      timeCheckOut.value = '13';
-    }
-    if (timeCheckIn.value === '14') {
-      timeCheckOut.value = '14';
-    }
-  });
+
+  var time = {'12': 12, '13': 13, '14': 14};
+  var fixTimeOfCheckOut = function (timeCheckOut, time, timeCheckIn) {
+    timeCheckOut.value = time[timeCheckIn.value];
+  };
+  window.synchronizeFields(timeCheckIn, timeCheckOut, time, fixTimeOfCheckOut);
+
 
   // Автоматическая корректировка полей формы: тип жилья синхронизирован с ценой
-  typeOfAccomodation.addEventListener('change', function () {
-    if (typeOfAccomodation.value === 'flat') {
-      priceForAccomodation.value = '1000';
-    }
-    if (typeOfAccomodation.value === 'shack') {
-      priceForAccomodation.value = '0';
-    }
-    if (typeOfAccomodation.value === 'palace') {
-      priceForAccomodation.value = '10000';
-    }
-  });
+
+  var accomodations = {'flat': 1000, 'shack': 0, 'palace': 10000};
+  var fixAccomodationPrice = function (priceFoAccomodation, accomodations, typeOfAccomodation) {
+    priceFoAccomodation.value = accomodations[typeOfAccomodation.value];
+  };
+  window.synchronizeFields(typeOfAccomodation, priceForAccomodation, accomodations, fixAccomodationPrice);
+
 
   // Автоматическая корректировка полей формы: количество комнат синхронизировано с количеством гостей
-  roomNumber.addEventListener('change', function () {
-    if (roomNumber.value === '2' || roomNumber.value === '100') {
-      capacity.value = 'for 3 guests';
-    } else if (roomNumber.value === '1') {
-      capacity.value = 'not for guests';
-    }
-  });
+
+  var room = {'1': 'not for guests', '2': 'for 3 guests', '100': 'for 3 guests'};
+  var fixNumberOfGuests = function (capacity, room, roomNumber) {
+    capacity.value = room[roomNumber.value];
+  };
+
+  window.synchronizeFields(roomNumber, capacity, room, fixNumberOfGuests);
 
   // Проверка правильности заполнения формы при отправке
   var validateFormHandler = function () {

@@ -1,5 +1,5 @@
 'use strict';
-window.renderPinBlock = (function () {
+window.showCard = (function () {
 
 
   function getOfferType(type) {
@@ -7,7 +7,7 @@ window.renderPinBlock = (function () {
       return 'Квартира';
     } else if (type === 'house') {
       return 'Дом';
-    } else {
+    } else if (type === 'bungalo') {
       return 'Бунгало';
     }
   }

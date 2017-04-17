@@ -19,19 +19,18 @@ function generateMap() {
 
 
   // 3. рисуем информацию о первом элементе в блоке слева
-  window.renderPinBlock.getCardInformation(pins[0]);
+  window.showCard.getCardInformation(pins[0]);
 
   // 4. навешиваем события
- setPinEvents(pins);
-    
+  setPinEvents(pins);
+
  // 5. Валидация Формы
-window.validateForm;
+  window.validateForm;
 
 }
 
 
-
- function setPinEvents(pins) {
+function setPinEvents(pins) {
 
 
   var tokyoPin = document.querySelector('.tokyo__pin-map');
@@ -76,10 +75,10 @@ window.validateForm;
   // Получение индекса элемента с классом .pin--active и передача индекса в функцию renderPinBlock;
   var sendIndexToRenderPinBlock = function () {
     var htmlCollection = tokyoPin.children;
-    for (var i = 1; i < htmlCollection.length; i++) {
+    for (var i = 0; i < htmlCollection.length; i++) {
       var elementCollection = htmlCollection.item(i);
       if (elementCollection.classList.contains('pin--active')) {
-        window.renderPinBlock.getCardInformation(pins[i]);
+        window.showCard.getCardInformation(pins[i]);
       }
     }
   };
@@ -128,6 +127,71 @@ window.validateForm;
         closeDialog(evt);
       }
     });
+  });
+
+  var tokyo = document.querySelector('.tokyo__pin-map');
+  var address = document.querySelector('#address');
+
+
+  tokyo.addEventListener('mousedown', function (evt) {
+
+    evt.preventDefault();
+
+    var startCoords = {
+      x: evt.clientX,
+      y: evt.clientY
+    };
+
+    address.setAttribute('value', 'X: ' + startCoords.x + 'Y: ' + startCoords.y);
+
+    var onMouseMove = function (moveEvt) {
+      moveEvt.preventDefault();
+
+
+       // Расстояние, которое успела преодолеть мышка между соседними событиями mousemove(Смещение)
+      var shift = {
+        x: startCoords.x - moveEvt.clientX,
+        y: startCoords.y - moveEvt.clientY
+
+      };
+       // Перезатирает объет со стартовыми координатами
+      startCoords = {
+        x: moveEvt.clientX,
+        y: moveEvt.clientY
+
+
+      };
+
+      address.setAttribute('value', 'X: ' + startCoords.x + 'Y: ' + startCoords.y);
+
+      var target = moveEvt.target;
+      target.style.top = (target.offsetTop - shift.y) + 'px';
+      target.style.left = (target.offsetLeft - shift.x) + 'px';
+
+
+    };
+
+
+    var onMouseUp = function (upEvt) {
+      upEvt.preventDefault();
+
+      var endCoords = {
+        x: upEvt.clientX,
+        y: upEvt.clientY
+      };
+
+      address.setAttribute('value', 'X: ' + endCoords.x + ',Y: ' + endCoords.y);
+
+
+      tokyo.removeEventListener('mousemove', onMouseMove);
+      tokyo.removeEventListener('mouseup', onMouseUp);
+
+    };
+
+    tokyo.addEventListener('mousemove', onMouseMove);
+    tokyo.addEventListener('mouseup', onMouseUp);
+
+
   });
 
 
