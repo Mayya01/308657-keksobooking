@@ -1,8 +1,5 @@
 'use strict';
 
-/* global randomInteger */
-/* global randomArrItem */
-
 
 /*
  * Рендет точек на карте
@@ -25,7 +22,7 @@ function generateMap() {
   setPinEvents(pins);
 
  // 5. Валидация Формы
-  window.validateForm;
+  window.validateForm();
 
 }
 

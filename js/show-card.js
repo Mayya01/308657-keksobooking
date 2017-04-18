@@ -10,6 +10,7 @@ window.showCard = (function () {
     } else if (type === 'bungalo') {
       return 'Бунгало';
     }
+    return '';
   }
 
   var getCardInformation = function (pinFirst) {

@@ -17,8 +17,8 @@ window.validateForm = (function () {
 // Автоматическая корректировка полей формы: время заезда и выезда.
 
   var time = {'12': 12, '13': 13, '14': 14};
-  var fixTimeOfCheckOut = function (timeCheckOut, time, timeCheckIn) {
-    timeCheckOut.value = time[timeCheckIn.value];
+  var fixTimeOfCheckOut = function (checkOutTime, timeAccomodation, checkInTime) {
+    checkOutTime.value = timeAccomodation[checkInTime.value];
   };
   window.synchronizeFields(timeCheckIn, timeCheckOut, time, fixTimeOfCheckOut);
 
@@ -26,8 +26,8 @@ window.validateForm = (function () {
   // Автоматическая корректировка полей формы: тип жилья синхронизирован с ценой
 
   var accomodations = {'flat': 1000, 'shack': 0, 'palace': 10000};
-  var fixAccomodationPrice = function (priceFoAccomodation, accomodations, typeOfAccomodation) {
-    priceFoAccomodation.value = accomodations[typeOfAccomodation.value];
+  var fixAccomodationPrice = function (price, accomodationsArray, accomodationType) {
+    price.value = accomodationsArray[accomodationType.value];
   };
   window.synchronizeFields(typeOfAccomodation, priceForAccomodation, accomodations, fixAccomodationPrice);
 
@@ -35,8 +35,8 @@ window.validateForm = (function () {
   // Автоматическая корректировка полей формы: количество комнат синхронизировано с количеством гостей
 
   var room = {'1': 'not for guests', '2': 'for 3 guests', '100': 'for 3 guests'};
-  var fixNumberOfGuests = function (capacity, room, roomNumber) {
-    capacity.value = room[roomNumber.value];
+  var fixNumberOfGuests = function (capacityRoom, roomArray, numberOfRooms) {
+    capacityRoom.value = roomArray[numberOfRooms.value];
   };
 
   window.synchronizeFields(roomNumber, capacity, room, fixNumberOfGuests);
