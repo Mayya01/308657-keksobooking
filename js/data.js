@@ -1,56 +1,21 @@
 'use strict';
+
 window.getPins = (function () {
+  var successHandler = function (pins) {
+    window.generateMap(pins);
 
-// генерирует информацию для пина,генерирует объекты для массива
-  var getPin = function (index) {
-    var titleArray = ['Большая уютная квартира',
-      'Маленькая неуютная квартира',
-      'Огромный прекрасный дворец',
-      'Маленький ужасный дворец',
-      'Красивый гостевой домик',
-      'Некрасивый негостеприимный домик',
-      'Уютное бунгало далеко от моря',
-      'Неуютное бунгало по колено в воде'];
-
-    var getFeatures = function () {
-      return ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'].splice(0, window.randomInteger(0, 5));
-    };
-
-    var randomData = {
-      'author': {
-        'avatar': 'img/avatars/user0' + (index + 1) + '.png'
-      },
-
-      'offer': {
-        'title': titleArray[index],
-        'address': '',
-        'price': window.randomInteger(1000, 1000000),
-        'features': getFeatures(),
-        'type': window.randomArrItem(['flat', 'house', 'bungalo']),
-        'rooms': window.randomInteger(1, 5),
-        'guests': window.randomInteger(1, 15),
-
-        'checkin': window.randomArrItem(['12:00', '13:00', '14:00']),
-        'checkout': window.randomInteger(12, 14) + ':00',
-
-        'description': '',
-        'photos': []
-      },
-      'location': {
-        'x': window.randomInteger(300, 900),
-        'y': window.randomInteger(100, 500)
-      }
-    };
-
-    randomData.address = randomData.location.x + ', ' + randomData.location.y;
-    return randomData;
   };
 
 
-  var pins = [];
-  for (var i = 0; i < 8; i++) {
-    pins[i] = getPin(i);
-  }
-
-  return pins;
+  var errorHundler = function (errorMessage) {
+    var element = document.createElement('div');
+    element.style = 'z-index: 100; margin:0 auto; text-align: center; background-color:#C6F2F9; width:1200px';
+    element.style.fontFamily = 'Roboto, Arial, sans-serif';
+    element.style.porisition = 'absolute';
+    element.style.border = '1px solid white';
+    element.style.fontSize = '18px';
+    element.textContent = errorMessage;
+    document.querySelector('.tokyo').insertAdjacentElement('afterbegin', element);
+  };
+  window.load(successHandler, errorHundler);
 })();
