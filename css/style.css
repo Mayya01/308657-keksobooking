@@ -135,7 +135,7 @@ select option:hover {
     background: white url(../img/features-sprite.png) no-repeat;
 }
 
-.feature__image--dishwasher {
+ .feature__image--dishwasher {
     background-position: 0 -7px;
 }
 

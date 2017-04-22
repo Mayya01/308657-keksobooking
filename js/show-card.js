@@ -31,11 +31,13 @@ window.showCard = (function () {
 
     clonedSimilarLodgeTemplate.querySelector('.lodge__checkin-time').textContent = 'Заезд после ' + pinFirst.offer.checkin + ' , выезд до ' + pinFirst.offer.checkout;
 
-    var html = '';
+    var fragment = document.createDocumentFragment();
     for (var i = 0; i < pinFirst.offer.features.length; i++) {
-      html += '<span class=feature__image feature__image' + pinFirst.offer.features[i] + '></span>';
+      var spanFeature = document.createElement('span');
+      spanFeature.className = 'feature__image feature__image--' + pinFirst.offer.features[i];
+      fragment.appendChild(spanFeature);
     }
-    clonedSimilarLodgeTemplate.querySelector('.lodge__features').insertAdjacentHTML('beforeend', html);
+    clonedSimilarLodgeTemplate.querySelector('.lodge__features').appendChild(fragment);
 
     clonedSimilarLodgeTemplate.querySelector('.lodge__description').textContent = pinFirst.offer.description;
 
