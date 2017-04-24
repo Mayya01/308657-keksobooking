@@ -98,11 +98,12 @@
       });
     });
 
-    var tokyo = document.querySelector('.tokyo__pin-map');
+
     var address = document.querySelector('#address');
+    var pinMain = document.querySelector('.pin__main');
 
 
-    tokyo.addEventListener('mousedown', function (evt) {
+    pinMain.addEventListener('mousedown', function (evt) {
 
       evt.preventDefault();
 
@@ -129,9 +130,9 @@
 
         address.setAttribute('value', 'X: ' + startCoords.x + 'Y: ' + startCoords.y);
 
-        var target = moveEvt.target;
-        target.style.top = (target.offsetTop - shift.y) + 'px';
-        target.style.left = (target.offsetLeft - shift.x) + 'px';
+
+        pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
+        pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
       };
 
 
@@ -146,11 +147,11 @@
         address.setAttribute('value', 'X: ' + endCoords.x + ',Y: ' + endCoords.y);
 
 
-        tokyo.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mousemove', onMouseMove);
         document.removeEventListener('mouseup', onMouseUp);
       };
 
-      tokyo.addEventListener('mousemove', onMouseMove);
+      docemnt.addEventListener('mousemove', onMouseMove);
       document.addEventListener('mouseup', onMouseUp);
 
 
