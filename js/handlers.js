@@ -151,7 +151,7 @@
         document.removeEventListener('mouseup', onMouseUp);
       };
 
-      docemnt.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mousemove', onMouseMove);
       document.addEventListener('mouseup', onMouseUp);
 
 
