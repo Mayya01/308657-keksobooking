@@ -5,7 +5,6 @@
 
   window.load = function (onSuccess, onError) {
     var xhr = new XMLHttpRequest();
-    // xhr.response = 'json';
     var parsePin = function (response) {
       var data = JSON.parse(response);
       return data;

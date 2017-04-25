@@ -41,23 +41,6 @@
       }
     };
 
-  // Получение индекса элемента с классом .pin--active и передача индекса в функцию renderPinBlock;
-    var sendIndexToRenderPinBlock = function () {
-      var htmlCollection = tokyoPin.children;
-      for (var i = 0; i < htmlCollection.length; i++) {
-        var elementCollection = htmlCollection.item(i);
-        if (elementCollection.classList.contains('pin--active')) {
-          window.showCard.getCardInformation(pins[i]);
-        }
-      }
-    };
-
-  // Добавляет класс .pin--active к объекту события
-    var addClassActive = function (evt) {
-      if (evt.target.classList.contains('pin')) {
-        evt.target.classList.add('pin--active');
-      }
-    };
 
   // Закрытие окна .dialog после клике на один из пинов страницы: по клику, нажатием на esc и enter
     var closeDialog = function (evt) {
@@ -72,9 +55,18 @@
     tokyoPin.addEventListener('click', function (evt) {
       deleteClassActive();
 
-      addClassActive(evt);
 
-      sendIndexToRenderPinBlock();
+      // Добавляет класс .pin--active к объекту события
+      var element = evt.target;
+      if (!element.classList.contains('pin')) {
+        element = element.parentNode;
+      }
+      element.classList.add('pin--active');
+
+      // показываем карточку
+      if (element.dataset.index) {
+        window.showCard.getCardInformation(pins[element.dataset.index]);
+      }
 
       dialog.style.display = 'block';
 
@@ -112,8 +104,6 @@
         y: evt.clientY
       };
 
-      address.setAttribute('value', 'X: ' + startCoords.x + 'Y: ' + startCoords.y);
-
       var onMouseMove = function (moveEvt) {
         moveEvt.preventDefault();
 
@@ -128,23 +118,23 @@
           y: moveEvt.clientY
         };
 
-        address.setAttribute('value', 'X: ' + startCoords.x + 'Y: ' + startCoords.y);
-
 
         pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
         pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
+
+        var ICON_WIDTH = 75;// Ширина div контейнера
+        var ICON_HEIGHT = 94;// Высота div контейнера
+
+        var newPinCoordinateY = parseInt(pinMain.style.top, 10) + ICON_HEIGHT;
+        var newPinCoordinateX = parseInt(pinMain.style.left, 10) + ICON_WIDTH / 2;
+
+        address.value = 'X: ' + newPinCoordinateX + ' px, Y: ' + newPinCoordinateY + ' px';
+
       };
 
 
       var onMouseUp = function (upEvt) {
         upEvt.preventDefault();
-
-        var endCoords = {
-          x: upEvt.clientX,
-          y: upEvt.clientY
-        };
-
-        address.setAttribute('value', 'X: ' + endCoords.x + ',Y: ' + endCoords.y);
 
 
         document.removeEventListener('mousemove', onMouseMove);

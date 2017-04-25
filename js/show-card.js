@@ -14,6 +14,10 @@ window.showCard = (function () {
   }
 
   var getCardInformation = function (pinFirst) {
+    if (!pinFirst) {
+      return;
+    }
+
     var similarOffer = document.querySelector('#offer-dialog').querySelector('.dialog__panel');
 
     var clonedSimilarLodgeTemplate = document.querySelector('#lodge-template').content.cloneNode(true);

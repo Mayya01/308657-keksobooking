@@ -3,7 +3,6 @@
 window.getPins = (function () {
   var successHandler = function (pins) {
     window.generateMap(pins);
-
   };
 
 
