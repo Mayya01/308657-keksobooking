@@ -1,12 +1,15 @@
 'use strict';
-
+window.pins = [];
 window.getPins = (function () {
   var successHandler = function (pins) {
-    window.generateMap(pins);
+    window.pins = pins;
+
+    var MAX_COUNT_PIN_ON_FIRST_LOAD = 3;
+    window.generateMap(pins.slice(0, MAX_COUNT_PIN_ON_FIRST_LOAD));
   };
 
 
-  var errorHundler = function (errorMessage) {
+  var errorHandler = function (errorMessage) {
     var element = document.createElement('div');
     element.style = 'z-index: 100; margin:0 auto; text-align: center; background-color:#C6F2F9; width:1200px';
     element.style.fontFamily = 'Roboto, Arial, sans-serif';
@@ -16,5 +19,9 @@ window.getPins = (function () {
     element.textContent = errorMessage;
     document.querySelector('.tokyo').insertAdjacentElement('afterbegin', element);
   };
-  window.load(successHandler, errorHundler);
+
+  window.load(successHandler, errorHandler);
+
 })();
+
+

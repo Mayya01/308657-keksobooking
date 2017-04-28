@@ -36,17 +36,19 @@ window.showCard = (function () {
     clonedSimilarLodgeTemplate.querySelector('.lodge__checkin-time').textContent = 'Заезд после ' + pinFirst.offer.checkin + ' , выезд до ' + pinFirst.offer.checkout;
 
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < pinFirst.offer.features.length; i++) {
+    pinFirst.offer.features.forEach(function (element) {
       var spanFeature = document.createElement('span');
-      spanFeature.className = 'feature__image feature__image--' + pinFirst.offer.features[i];
+      spanFeature.className = 'feature__image feature__image--' + element;
       fragment.appendChild(spanFeature);
-    }
+    });
+
     clonedSimilarLodgeTemplate.querySelector('.lodge__features').appendChild(fragment);
 
     clonedSimilarLodgeTemplate.querySelector('.lodge__description').textContent = pinFirst.offer.description;
 
-    similarOffer.innerHTML = '';
+    document.querySelector('.dialog__title img').setAttribute('src', pinFirst.author.avatar);
 
+    similarOffer.innerHTML = '';
     similarOffer.appendChild(clonedSimilarLodgeTemplate);
   };
 

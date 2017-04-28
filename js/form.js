@@ -5,8 +5,8 @@ window.validateForm = (function () {
 
   var timeCheckIn = document.getElementById('time');
   var timeCheckOut = document.getElementById('timeout');
-  var typeOfAccomodation = document.getElementById('type');
-  var priceForAccomodation = document.getElementById('price');
+  var typeOfAccommodation = document.getElementById('type');
+  var priceForAccommodation = document.getElementById('price');
   var roomNumber = document.getElementById('room_number');
   var capacity = document.getElementById('capacity');
   var description = document.getElementById('title');
@@ -17,19 +17,19 @@ window.validateForm = (function () {
 // Автоматическая корректировка полей формы: время заезда и выезда.
 
   var time = {'12': 12, '13': 13, '14': 14};
-  var fixTimeOfCheckOut = function (checkOutTime, timeAccomodation, checkInTime) {
-    checkOutTime.value = timeAccomodation[checkInTime.value];
+  var fixTimeOfCheckOut = function (checkOutTime, timeAccommodation, checkInTime) {
+    checkOutTime.value = timeAccommodation[checkInTime.value];
   };
   window.synchronizeFields(timeCheckIn, timeCheckOut, time, fixTimeOfCheckOut);
 
 
   // Автоматическая корректировка полей формы: тип жилья синхронизирован с ценой
 
-  var accomodations = {'flat': 1000, 'shack': 0, 'palace': 10000};
-  var fixAccomodationPrice = function (price, accomodationsArray, accomodationType) {
-    price.value = accomodationsArray[accomodationType.value];
+  var accommodations = {'flat': 1000, 'shack': 0, 'palace': 10000};
+  var fixAccommodationPrice = function (price, accommodationsArray, accommodationType) {
+    price.value = accommodationsArray[accommodationType.value];
   };
-  window.synchronizeFields(typeOfAccomodation, priceForAccomodation, accomodations, fixAccomodationPrice);
+  window.synchronizeFields(typeOfAccommodation, priceForAccommodation, accommodations, fixAccommodationPrice);
 
 
   // Автоматическая корректировка полей формы: количество комнат синхронизировано с количеством гостей
@@ -49,7 +49,8 @@ window.validateForm = (function () {
       address.style.boxShadow = 'none';
       address.style.border = '2px solid red';
       return false;
-    } return true;
+    }
+    return true;
   };
 
   button.addEventListener('click', validateFormHandler);

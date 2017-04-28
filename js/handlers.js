@@ -28,17 +28,15 @@
 
     });
 
-
-  // Удаляем у элементов коллеции класс .pin--active
+    // Удаляем у элементов коллеции класс .pin--active
     var deleteClassActive = function () {
-      var htmlCollection = tokyoPin.children; // коллекция элементов родительского элемента tokyoPin
-      for (var i = 0; i < htmlCollection.length; i++) {
-        var child = htmlCollection.item(i);
+      Array.from(tokyoPin.children).forEach(function (element) {
+        var child = element;
         if (child.classList.contains('pin--active')) {
           child.classList.remove('pin--active');
-          break;
         }
-      }
+
+      });
     };
 
 

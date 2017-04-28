@@ -1,8 +1,8 @@
 'use strict';
 
-window.synchronizeFields = function (element, changeElement, paramOject, callback) {
+window.synchronizeFields = function (element, changeElement, paramObject, callback) {
   element.addEventListener('change', function () {
-    callback(changeElement, paramOject, element);
+    callback(changeElement, paramObject, element);
   });
 };
 

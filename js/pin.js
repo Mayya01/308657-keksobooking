@@ -10,11 +10,10 @@ window.renderPins = (function () {
   // 2 . Генерирует html пинов
   var getPinsHtml = function (pinData) {
     var pinMapHtml = '';
+    pinData.forEach(function (element, index) {
+      pinMapHtml += generatePinData(index, pinData[index]);
 
-    for (var i = 0; i < pinData.length; i++) {
-
-      pinMapHtml += generetPinData(i, pinData[i]);
-    }
+    });
     return pinMapHtml;
   };
 
@@ -52,7 +51,7 @@ window.renderPins = (function () {
   };
 
 // 3. Генерирует html одного пина на основе информации о пине
-  var generetPinData = function (index, pinData) {
+  var generatePinData = function (index, pinData) {
     pinData = editPinLocation(pinData);
 
 
